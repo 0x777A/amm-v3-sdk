@@ -1,0 +1,40 @@
+{
+  "name": "amm-v3-sdk",
+  "version": "1.0.0",
+  "description": "amm v3 sdk",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "0.28.1-beta.1",
+    "@metaplex/js": "4.9.0",
+    "@solana/spl-token": "^0.1.8",
+    "@solana/web3.js": "1.78.0",
+    "commander": "^9.4.0",
+    "decimal.js": "^10.3.1",
+    "node-fetch": "^2.6.7",
+    "ts-node": "^10.8.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.2.22",
+    "@types/chai-as-promised": "^7.1.4",
+    "@types/mocha": "^8.2.3",
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^8.4.0",
+    "ts-mocha": "^8.0.0",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0x777A/amm-v3-sdk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0x777A/amm-v3-sdk/issues"
+  },
+  "homepage": "https://github.com/0x777A/amm-v3-sdk#readme"
+}
