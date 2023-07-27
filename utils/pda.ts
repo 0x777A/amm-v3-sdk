@@ -12,11 +12,6 @@ import {
   i32ToBytes,
 } from "./seed";
 
-import * as metaplex from "@metaplex/js";
-const {
-  metadata: { Metadata },
-} = metaplex.programs;
-
 export async function getAmmConfigAddress(
   index: number,
   programId: PublicKey
@@ -117,10 +112,10 @@ export async function getNftMetadataAddress(
   const [address, bump] = await PublicKey.findProgramAddress(
     [
       Buffer.from("metadata"),
-      metaplex.programs.metadata.MetadataProgram.PUBKEY.toBuffer(),
+      new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s").toBuffer(),
       nftMint.toBuffer(),
     ],
-    metaplex.programs.metadata.MetadataProgram.PUBKEY
+    new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s")
   );
   return [address, bump];
 }

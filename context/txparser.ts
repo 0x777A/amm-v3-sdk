@@ -66,7 +66,7 @@ export class TransactionParser {
 
   private parseArgs(tx: VersionedTransactionResponse): TxParseData[] {
     if (tx == undefined) {
-      return;
+      return [];
     }
     // console.log(tx);
     let args: TxParseData[] = [];

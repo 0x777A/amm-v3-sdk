@@ -8,7 +8,6 @@ import {
   Signer,
 } from "@solana/web3.js";
 
-import { programs } from "@metaplex/js";
 import {
   SqrtPriceMath,
   LiquidityMath,
@@ -660,7 +659,7 @@ export class AmmInstruction {
           tokenProgram: TOKEN_PROGRAM_ID,
           tokenProgram2022: TOKEN_PROGRAM_ID,
           associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
-          metadataProgram: programs.metadata.MetadataProgram.PUBKEY,
+          metadataProgram: new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"),
         }
       );
       instructions.push(openIx);
@@ -696,7 +695,7 @@ export class AmmInstruction {
           rent: SYSVAR_RENT_PUBKEY,
           tokenProgram: TOKEN_PROGRAM_ID,
           associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
-          metadataProgram: programs.metadata.MetadataProgram.PUBKEY,
+          metadataProgram: new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"),
         }
       );
       instructions.push(openIx);

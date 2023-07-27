@@ -64,9 +64,9 @@ export async function fetchAllPositionsByOwner(
     for (const [i, info] of mintAccountInfos.entries()) {
       if (info) {
         const { supply, decimals } = MintLayout.decode(info.data);
-        const sup = supply.readBigInt64LE();
+        const sup = supply.toString();
         // console.log(sup, supply, decimals)
-        if (sup == 1 && decimals === 0) {
+        if (sup == "1" && decimals === 0) {
           const [positionAddress] = await getPersonalPositionAddress(
             mints[i],
             ctx.program.programId
