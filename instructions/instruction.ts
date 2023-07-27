@@ -36,15 +36,13 @@ import {
 } from "../utils";
 
 import {
-  Token,
   TOKEN_PROGRAM_ID,
+  TOKEN_2022_PROGRAM_ID,
   ASSOCIATED_TOKEN_PROGRAM_ID,
   NATIVE_MINT,
+  getAssociatedTokenAddress,
 } from "@solana/spl-token";
 
-const TOKEN_PROGRAM_ID_2022 = new PublicKey(
-  "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
-);
 
 import {
   openPositionInstruction,
@@ -582,9 +580,7 @@ export class AmmInstruction {
       ctx.program.programId,
       tickArrayUpperStartIndex
     );
-    const positionANftAccount = await Token.getAssociatedTokenAddress(
-      ASSOCIATED_TOKEN_PROGRAM_ID,
-      TOKEN_PROGRAM_ID,
+    const positionANftAccount = await getAssociatedTokenAddress(
       accounts.positionNftMint,
       accounts.positionNftOwner
     );
@@ -662,7 +658,7 @@ export class AmmInstruction {
           systemProgram: SystemProgram.programId,
           rent: SYSVAR_RENT_PUBKEY,
           tokenProgram: TOKEN_PROGRAM_ID,
-          tokenProgram2022: TOKEN_PROGRAM_ID_2022,
+          tokenProgram2022: TOKEN_PROGRAM_ID,
           associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
           metadataProgram: programs.metadata.MetadataProgram.PUBKEY,
         }
@@ -802,9 +798,7 @@ export class AmmInstruction {
       tickArrayUpperStartIndex
     );
 
-    const positionANftAccount = await Token.getAssociatedTokenAddress(
-      ASSOCIATED_TOKEN_PROGRAM_ID,
-      TOKEN_PROGRAM_ID,
+    const positionANftAccount = await getAssociatedTokenAddress(
       positionState.nftMint,
       accounts.positionNftOwner
     );
@@ -866,7 +860,7 @@ export class AmmInstruction {
           vault1Mint: poolState.tokenMint1,
           personalPosition,
           tokenProgram: TOKEN_PROGRAM_ID,
-          tokenProgram2022: TOKEN_PROGRAM_ID_2022,
+          tokenProgram2022: TOKEN_PROGRAM_ID,
         }
       );
       instructions.push(ix);
@@ -1023,9 +1017,7 @@ export class AmmInstruction {
       tickArrayUpperStartIndex
     );
 
-    const positionANftAccount = await Token.getAssociatedTokenAddress(
-      ASSOCIATED_TOKEN_PROGRAM_ID,
-      TOKEN_PROGRAM_ID,
+    const positionANftAccount = await getAssociatedTokenAddress(
       positionState.nftMint,
       accounts.positionNftOwner
     );
@@ -1095,8 +1087,8 @@ export class AmmInstruction {
           vault1Mint: ammPool.poolState.tokenMint1,
           personalPosition,
           tokenProgram: TOKEN_PROGRAM_ID,
-          tokenProgram2022: TOKEN_PROGRAM_ID_2022,
-          memoProgram: TOKEN_PROGRAM_ID_2022,
+          tokenProgram2022: TOKEN_PROGRAM_ID,
+          memoProgram: TOKEN_PROGRAM_ID,
         },
         rewardAccounts
       );
@@ -1539,8 +1531,8 @@ export class AmmInstruction {
         inputTokenAccount: startInputTokenAccount,
         inputTokenMint: startInputTokenMint,
         tokenProgram: TOKEN_PROGRAM_ID,
-        tokenProgram2022: TOKEN_PROGRAM_ID_2022,
-        memoProgram: TOKEN_PROGRAM_ID_2022,
+        tokenProgram2022: TOKEN_PROGRAM_ID,
+        memoProgram: TOKEN_PROGRAM_ID,
         remainings: remainingAccounts,
       }
     );
@@ -1613,7 +1605,7 @@ export class AmmInstruction {
         outputVaultMint,
         observationState: ammPool.poolState.observationKey,
         tokenProgram: TOKEN_PROGRAM_ID,
-        tokenProgram2022: TOKEN_PROGRAM_ID_2022,
+        tokenProgram2022: TOKEN_PROGRAM_ID,
         remainings: [...remainingAccounts],
       }
     );
@@ -1715,9 +1707,7 @@ export class AmmInstruction {
       }
       inputTokenAccount = wSolAccount;
     } else {
-      inputTokenAccount = await Token.getAssociatedTokenAddress(
-        ASSOCIATED_TOKEN_PROGRAM_ID,
-        TOKEN_PROGRAM_ID,
+      inputTokenAccount = await getAssociatedTokenAddress(
         param.inputTokenMint,
         owner
       );
@@ -1729,9 +1719,7 @@ export class AmmInstruction {
       }
       outputTokenAccount = wSolAccount;
     } else {
-      outputTokenAccount = await Token.getAssociatedTokenAddress(
-        ASSOCIATED_TOKEN_PROGRAM_ID,
-        TOKEN_PROGRAM_ID,
+      outputTokenAccount = await getAssociatedTokenAddress(
         outputTokenMint,
         owner
       );
@@ -1806,9 +1794,7 @@ async function getATAOrRandomWsolTokenAccount(
     instructions.push(...ixs);
     console.log("new wsol account:", newAccount.publicKey.toBase58());
   } else {
-    tokenAccount = await Token.getAssociatedTokenAddress(
-      ASSOCIATED_TOKEN_PROGRAM_ID,
-      TOKEN_PROGRAM_ID,
+    tokenAccount = await getAssociatedTokenAddress(
       tokenMint,
       owner
     );
