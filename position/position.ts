@@ -1,4 +1,4 @@
-import { PublicKey, TokenAccountsFilter } from "@solana/web3.js";
+import {  PublicKey, TokenAccountsFilter } from "@solana/web3.js";
 import { TOKEN_PROGRAM_ID, MintLayout, AccountLayout } from "@solana/spl-token";
 import {
   PersonalPositionState,
@@ -8,7 +8,7 @@ import {
   TickState,
 } from "../states";
 import { getPersonalPositionAddress } from "../utils";
-import { Context } from "../base";
+import { Context } from "../context";
 import { MathUtil, Q64 } from "../math";
 import { BN } from "@coral-xyz/anchor";
 import {
