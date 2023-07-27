@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "@coral-xyz/anchor": "0.28.1-beta.1",
-    "@metaplex/js": "4.9.0",
+    "@metaplex/js": "^4.12.0",
     "@solana/spl-token": "^0.3.8",
     "@solana/web3.js": "1.78.0",
     "commander": "^9.4.0",

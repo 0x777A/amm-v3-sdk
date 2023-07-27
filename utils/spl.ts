@@ -7,9 +7,14 @@ import {
   SystemProgram,
   TransactionInstruction,
 } from "@solana/web3.js";
-import { TOKEN_PROGRAM_ID, Token,NATIVE_MINT, AccountLayout } from "@solana/spl-token";
+import {
+  TOKEN_PROGRAM_ID,
+  NATIVE_MINT,
+  AccountLayout,
+  createCloseAccountInstruction,
+  createInitializeAccountInstruction,
+} from "@solana/spl-token";
 import { BN } from "@coral-xyz/anchor";
-
 
 export function isWSOLTokenMint(tokenMint: PublicKey): boolean {
   return tokenMint.equals(NATIVE_MINT);
@@ -26,8 +31,7 @@ export function makeCloseAccountInstruction({
   payer: PublicKey;
   multiSigners?: Signer[];
 }) {
-  return Token.createCloseAccountInstruction(
-    TOKEN_PROGRAM_ID,
+  return createCloseAccountInstruction(
     tokenAccount,
     payer,
     owner,
@@ -68,7 +72,7 @@ export async function makeCreateWrappedNativeAccountInstructions({
   );
 
   instructions.push(
-    Token.createInitAccountInstruction(
+    createInitializeAccountInstruction(
       TOKEN_PROGRAM_ID,
       NATIVE_MINT,
       newAccount.publicKey,
