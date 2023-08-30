@@ -181,6 +181,14 @@ export type AmmV3 = {
           "isSigner": false
         },
         {
+          "name": "tickArrayBitmap",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "Initialize an account to store if a tick array is initialized."
+          ]
+        },
+        {
           "name": "tokenProgram0",
           "isMut": false,
           "isSigner": false,
@@ -2217,6 +2225,60 @@ export type AmmV3 = {
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "createTickArrayBitmapExtension",
+      "docs": [
+        "Create tick array bitmap extension if needed for a pool",
+        "",
+        "# Arguments",
+        "",
+        "* `ctx` - The context of accounts",
+        ""
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true,
+          "docs": [
+            "Address paying to create the pool. Can be anyone"
+          ]
+        },
+        {
+          "name": "poolState",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "Initialize an account to store the pool state"
+          ]
+        },
+        {
+          "name": "tickArrayBitmap",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "Initialize an account to store if a tick array is initialized."
+          ]
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "To create a new program account"
+          ]
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "Sysvar for program account"
+          ]
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -2862,6 +2924,46 @@ export type AmmV3 = {
               "array": [
                 "u8",
                 115
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "tickArrayBitmapExtension",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "poolId",
+            "type": "publicKey"
+          },
+          {
+            "name": "positiveTickArrayBitmap",
+            "docs": [
+              "Packed initialized tick array state for start_tick_index is positive"
+            ],
+            "type": {
+              "array": [
+                {
+                  "defined": "TickArryBitmap"
+                },
+                14
+              ]
+            }
+          },
+          {
+            "name": "negativeTickArrayBitmap",
+            "docs": [
+              "Packed initialized tick array state for start_tick_index is negitive"
+            ],
+            "type": {
+              "array": [
+                {
+                  "defined": "TickArryBitmap"
+                },
+                14
               ]
             }
           }
@@ -3879,6 +3981,11 @@ export type AmmV3 = {
       "code": 6039,
       "name": "NotSupportMint",
       "msg": "Not support token_2022 mint extension"
+    },
+    {
+      "code": 6040,
+      "name": "MissingTickArrayBitmapExtensionAccount",
+      "msg": "Missing tickarray bitmap extension account"
     }
   ]
 };
@@ -4066,6 +4173,14 @@ export const IDL: AmmV3 = {
           "isSigner": false
         },
         {
+          "name": "tickArrayBitmap",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "Initialize an account to store if a tick array is initialized."
+          ]
+        },
+        {
           "name": "tokenProgram0",
           "isMut": false,
           "isSigner": false,
@@ -6102,6 +6217,60 @@ export const IDL: AmmV3 = {
           "type": "u64"
         }
       ]
+    },
+    {
+      "name": "createTickArrayBitmapExtension",
+      "docs": [
+        "Create tick array bitmap extension if needed for a pool",
+        "",
+        "# Arguments",
+        "",
+        "* `ctx` - The context of accounts",
+        ""
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "isMut": true,
+          "isSigner": true,
+          "docs": [
+            "Address paying to create the pool. Can be anyone"
+          ]
+        },
+        {
+          "name": "poolState",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "Initialize an account to store the pool state"
+          ]
+        },
+        {
+          "name": "tickArrayBitmap",
+          "isMut": true,
+          "isSigner": false,
+          "docs": [
+            "Initialize an account to store if a tick array is initialized."
+          ]
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "To create a new program account"
+          ]
+        },
+        {
+          "name": "rent",
+          "isMut": false,
+          "isSigner": false,
+          "docs": [
+            "Sysvar for program account"
+          ]
+        }
+      ],
+      "args": []
     }
   ],
   "accounts": [
@@ -6747,6 +6916,46 @@ export const IDL: AmmV3 = {
               "array": [
                 "u8",
                 115
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "tickArrayBitmapExtension",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "poolId",
+            "type": "publicKey"
+          },
+          {
+            "name": "positiveTickArrayBitmap",
+            "docs": [
+              "Packed initialized tick array state for start_tick_index is positive"
+            ],
+            "type": {
+              "array": [
+                {
+                  "defined": "TickArryBitmap"
+                },
+                14
+              ]
+            }
+          },
+          {
+            "name": "negativeTickArrayBitmap",
+            "docs": [
+              "Packed initialized tick array state for start_tick_index is negitive"
+            ],
+            "type": {
+              "array": [
+                {
+                  "defined": "TickArryBitmap"
+                },
+                14
               ]
             }
           }
@@ -7764,6 +7973,11 @@ export const IDL: AmmV3 = {
       "code": 6039,
       "name": "NotSupportMint",
       "msg": "Not support token_2022 mint extension"
+    },
+    {
+      "code": 6040,
+      "name": "MissingTickArrayBitmapExtensionAccount",
+      "msg": "Missing tickarray bitmap extension account"
     }
   ]
 };

@@ -8,6 +8,7 @@ import {
   AmmConfig,
   TickArrayState,
   PersonalPositionState,
+  TickArrayBitmapExtensionState,
 } from "./states";
 
 export class StateFetcher {
@@ -79,5 +80,13 @@ export class StateFetcher {
     return (await this.program.account.observationState.fetch(
       address
     )) as ObservationState;
+  }
+
+  public async getTickArrayBitmapExtesionState(
+    address: PublicKey
+  ): Promise<TickArrayBitmapExtensionState> {
+    return (await this.program.account.tickArrayBitmapExtension.fetch(
+      address
+    )) as TickArrayBitmapExtensionState;
   }
 }

@@ -69,6 +69,13 @@ export type PoolState = {
   // padding2: number[];
 };
 
+
+export type TickArrayBitmapExtensionState = {
+  poolId:PublicKey,
+  positiveTickArrayBitmap: BN[][],
+  negativeTickArrayBitmap: BN[][],
+}
+
 export type RewardInfo = {
   rewardState: number;
   openTime: BN;

@@ -5,6 +5,7 @@ import {
   PoolState,
   RewardInfo,
   StateFetcher,
+  TickArrayBitmapExtensionState,
   TickArrayState,
 } from "../states";
 import { Context } from "../context";
@@ -40,6 +41,7 @@ export class AmmPool {
   public readonly cacheDataProvider: CacheDataProviderImpl;
   public readonly stateFetcher: StateFetcher;
   public poolState: PoolState;
+  public tickArrayBitmapExtensionState: TickArrayBitmapExtensionState;
   public ammConfig: AmmConfig;
 
   /**

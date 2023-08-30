@@ -17,6 +17,10 @@ export const TICK_ARRAY_SEED = Buffer.from(
   anchor.utils.bytes.utf8.encode("tick_array")
 );
 
+export const TICK_ARRAY_BITMAP_SEED = Buffer.from(
+  anchor.utils.bytes.utf8.encode("pool_tick_array_bitmap_extension")
+);
+
 export const OPERATION_SEED = Buffer.from(
   anchor.utils.bytes.utf8.encode("operation")
 );
