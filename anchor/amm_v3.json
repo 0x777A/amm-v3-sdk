@@ -2947,7 +2947,10 @@
             "type": {
               "array": [
                 {
-                  "defined": "TickArryBitmap"
+                  "array": [
+                    "u64",
+                    8
+                  ]
                 },
                 14
               ]
@@ -2961,7 +2964,10 @@
             "type": {
               "array": [
                 {
-                  "defined": "TickArryBitmap"
+                  "array": [
+                    "u64",
+                    8
+                  ]
                 },
                 14
               ]

@@ -2947,7 +2947,10 @@ export type AmmV3 = {
             "type": {
               "array": [
                 {
-                  "defined": "TickArryBitmap"
+                  "array": [
+                    "u64",
+                    8
+                  ]
                 },
                 14
               ]
@@ -2961,7 +2964,10 @@ export type AmmV3 = {
             "type": {
               "array": [
                 {
-                  "defined": "TickArryBitmap"
+                  "array": [
+                    "u64",
+                    8
+                  ]
                 },
                 14
               ]
@@ -6939,7 +6945,10 @@ export const IDL: AmmV3 = {
             "type": {
               "array": [
                 {
-                  "defined": "TickArryBitmap"
+                  "array": [
+                    "u64",
+                    8
+                  ]
                 },
                 14
               ]
@@ -6953,7 +6962,10 @@ export const IDL: AmmV3 = {
             "type": {
               "array": [
                 {
-                  "defined": "TickArryBitmap"
+                  "array": [
+                    "u64",
+                    8
+                  ]
                 },
                 14
               ]
