@@ -11,6 +11,7 @@ import {
   u16ToBytes,
   i32ToBytes,
   TICK_ARRAY_BITMAP_SEED,
+  POOL_TICK_ARRAY_BITMAP_SEED,
 } from "./seed";
 
 export async function getAmmConfigAddress(
@@ -137,6 +138,17 @@ export async function getOperationAddress(
 ): Promise<[PublicKey, number]> {
   const [address, bump] = await PublicKey.findProgramAddress(
     [OPERATION_SEED],
+    programId
+  );
+  return [address, bump];
+}
+
+export async function getTickArrayBitmapAddress(
+  pool: PublicKey,
+  programId: PublicKey
+): Promise<[PublicKey, number]> {
+  const [address, bump] = await PublicKey.findProgramAddress(
+    [POOL_TICK_ARRAY_BITMAP_SEED, pool.toBuffer()],
     programId
   );
   return [address, bump];

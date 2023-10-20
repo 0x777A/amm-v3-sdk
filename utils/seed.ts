@@ -25,6 +25,10 @@ export const OPERATION_SEED = Buffer.from(
   anchor.utils.bytes.utf8.encode("operation")
 );
 
+export const POOL_TICK_ARRAY_BITMAP_SEED = Buffer.from(
+  anchor.utils.bytes.utf8.encode("pool_tick_array_bitmap_extension")
+);
+
 export function u16ToBytes(num: number) {
   const arr = new ArrayBuffer(2);
   const view = new DataView(arr);

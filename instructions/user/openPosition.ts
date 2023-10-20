@@ -45,6 +45,8 @@ export function openPositionInstruction(
     amount0Max,
     amount1Max,
   } = args;
+  console.log("open position args:", args);
+
   return program.methods
     .openPosition(
       tickLowerIndex,
@@ -60,7 +62,6 @@ export function openPositionInstruction(
     .instruction();
 }
 
-
 export function openPositionInstructionV2(
   program: Program<AmmV3>,
   args: {
@@ -71,7 +72,7 @@ export function openPositionInstructionV2(
     liquidity: BN;
     amount0Max: BN;
     amount1Max: BN;
-    with_metadata:boolean;
+    with_metadata: boolean;
   },
   accounts: {
     payer: PublicKey;
@@ -107,7 +108,7 @@ export function openPositionInstructionV2(
     liquidity,
     amount0Max,
     amount1Max,
-    with_metadata
+    with_metadata,
   } = args;
   return program.methods
     .openPositionV2(
@@ -119,7 +120,7 @@ export function openPositionInstructionV2(
       amount0Max,
       amount1Max,
       with_metadata,
-      null,
+      null
     )
     .accounts(accounts)
     .remainingAccounts([])

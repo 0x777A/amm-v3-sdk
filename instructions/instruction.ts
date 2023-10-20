@@ -27,6 +27,7 @@ import {
   getNftMetadataAddress,
   getPersonalPositionAddress,
   getTickArrayAddress,
+  getTickArrayBitmapAddress,
   isWSOLTokenMint,
   makeCreateWrappedNativeAccountInstructions,
   makeCloseAccountInstruction,
@@ -41,7 +42,6 @@ import {
   NATIVE_MINT,
   getAssociatedTokenAddress,
 } from "@solana/spl-token";
-
 
 import {
   openPositionInstruction,
@@ -64,7 +64,7 @@ import {
   createOperationAccountInstruction,
 } from "./admin";
 
-import { AmmPool,getTickArrayStartIndexByTick } from "../pool";
+import { AmmPool, getTickArrayStartIndexByTick } from "../pool";
 import { Context } from "../context";
 import Decimal from "decimal.js";
 
@@ -433,6 +433,11 @@ export class AmmInstruction {
       ctx.program.programId
     );
 
+    const [tick_array_bitmap, _bump4] = await getTickArrayBitmapAddress(
+      poolAddres,
+      ctx.program.programId
+    );
+
     const initialPriceX64 = SqrtPriceMath.priceToSqrtPriceX64(
       initialPrice,
       tokenMint0Decimals,
@@ -454,6 +459,7 @@ export class AmmInstruction {
         rent: SYSVAR_RENT_PUBKEY,
         tokenProgram0: accounts.tokenMint0Program,
         tokenProgram1: accounts.tokenMint1Program,
+        tickArrayBitmap: tick_array_bitmap,
       }
     );
 
@@ -479,7 +485,7 @@ export class AmmInstruction {
     tokenMint1Decimals: number,
     liquidity: BN,
     isV2: boolean,
-    with_metadata:boolean,
+    with_metadata: boolean,
     amountSlippage?: number
   ): Promise<{
     personalPosition: PublicKey;
@@ -526,7 +532,7 @@ export class AmmInstruction {
     tickUpperIndex: number,
     liquidity: BN,
     isV2: boolean,
-    with_metadata:boolean,
+    with_metadata: boolean,
     amountSlippage?: number
   ): Promise<{
     personalPosition: PublicKey;
@@ -634,7 +640,7 @@ export class AmmInstruction {
           liquidity: liquidity,
           amount0Max: amount0Max,
           amount1Max: amount1Max,
-          with_metadata
+          with_metadata,
         },
         {
           payer: accounts.payer,
@@ -659,11 +665,14 @@ export class AmmInstruction {
           tokenProgram: TOKEN_PROGRAM_ID,
           tokenProgram2022: TOKEN_PROGRAM_ID,
           associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
-          metadataProgram: new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"),
+          metadataProgram: new PublicKey(
+            "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+          ),
         }
       );
       instructions.push(openIx);
     } else {
+      console.log("open position");
       const openIx = await openPositionInstruction(
         ctx.program,
         {
@@ -695,7 +704,9 @@ export class AmmInstruction {
           rent: SYSVAR_RENT_PUBKEY,
           tokenProgram: TOKEN_PROGRAM_ID,
           associatedTokenProgram: ASSOCIATED_TOKEN_PROGRAM_ID,
-          metadataProgram: new PublicKey("metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"),
+          metadataProgram: new PublicKey(
+            "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+          ),
         }
       );
       instructions.push(openIx);
@@ -1793,10 +1804,7 @@ async function getATAOrRandomWsolTokenAccount(
     instructions.push(...ixs);
     console.log("new wsol account:", newAccount.publicKey.toBase58());
   } else {
-    tokenAccount = await getAssociatedTokenAddress(
-      tokenMint,
-      owner
-    );
+    tokenAccount = await getAssociatedTokenAddress(tokenMint, owner);
   }
   return {
     tokenAccount,

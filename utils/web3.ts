@@ -32,8 +32,9 @@ export async function sendTransaction(
 
   if (options == undefined) {
     options = {
-      preflightCommitment: "confirmed",
-      commitment: "confirmed",
+      // skipPreflight: true,
+      preflightCommitment: "processed",
+      commitment: "processed",
     };
   }
 
@@ -43,6 +44,9 @@ export async function sendTransaction(
   };
 
   tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash;
+  tx.feePayer = signers[0].publicKey;
+  console.log(tx.serialize({ verifySignatures: false }).toString("base64"));
+
   const signature = await connection.sendTransaction(tx, signers, sendOpt);
 
   const status = (
